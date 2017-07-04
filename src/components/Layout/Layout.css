@@ -1,0 +1,17 @@
+:local {
+  .layout {
+    display: flex;
+    height: 100%;
+    padding-top: 20px;
+
+    .alert {
+      .alert-message {}
+      .alert-close {}
+    }
+
+    .content {
+      flex: 1;
+      height: 100%;
+    }
+  }
+}

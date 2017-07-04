@@ -1,0 +1,31 @@
+:local {
+  .home {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    height: 100%;
+    width: 350px;
+    padding: 20vh 0;
+
+    .title {
+      align-items: center;
+      display: flex;
+
+      h3 {
+        flex: 1;
+        text-align: center;
+      }
+    }
+
+    .form {
+      display: flex;
+
+      .input-name {
+        outline: none;
+        flex-grow: 1;
+      }
+
+      .button {}
+    }
+  }
+}
