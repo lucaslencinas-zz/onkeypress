@@ -7,9 +7,6 @@ class Room extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.handleSend = this.handleSend.bind(this);
-    // this.handleMessageChange = this.handleMessageChange.bind(this);
-    // this.handleKeyPress = this.handleKeyPress.bind(this);
     this.state = { connection: socketio.createConnection() };
     this.initializeSocketClient(this.state.connection);
   }
@@ -23,17 +20,12 @@ class Room extends React.Component {
       console.log(player);
       this.props.onAddPlayer({ player, room });
     });
-    connection.on('current-players', (members) => {
-      console.log(members);
-      // this.props.onAddCurrentMembers(members)
-    });
+    connection.on('current-players', (members) => { console.log(members); });
 
     connection.on('button-assigned', (assignment) => {
       console.log(assignment);
       this.props.onButtonAssigned({ assignment, room });
     });
-    // connection.on('new-message', (msg) => this.props.onAddMessage(msg));
-    // connection.on('user-disconnected', (member) => this.props.onRemoveMember(member));
   }
 
   render() {
@@ -70,7 +62,8 @@ class Room extends React.Component {
 
 Room.propTypes = {
   room: PropTypes.object,
-  onAddPlayer: PropTypes.func
+  onAddPlayer: PropTypes.func,
+  onButtonAssigned: PropTypes.func
 };
 
 export default Room;

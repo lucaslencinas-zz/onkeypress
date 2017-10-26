@@ -7,9 +7,6 @@ class Player extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.handleSend = this.handleSend.bind(this);
-    // this.handleMessageChange = this.handleMessageChange.bind(this);
-    // this.handleKeyPress = this.handleKeyPress.bind(this);
     this.state = { connection: socketio.createConnection() };
     this.initializeSocketClient(this.state.connection);
   }
@@ -18,27 +15,12 @@ class Player extends React.Component {
     const handshake = { player: this.props.player, room: this.props.room };
 
     connection.emit('player-connected', handshake);
-    connection.on('room-connected', (room) => {
-      console.log(room);
-    // this.props.onAddMember(member)
-    });
-    connection.on('current-users', (members) => {
-      console.log(members);
-    // this.props.onAddCurrentMembers(members)
-    });
-
-    connection.on('button-assigned', (button) => {
-      console.log(button);
-    // this.props.onButtonAssigned(button)
-    });
-    // connection.on('new-message', (msg) => this.props.onAddMessage(msg));
-    // connection.on('user-disconnected', (member) => this.props.onRemoveMember(member));
+    connection.on('room-connected', (room) => { console.log(room); });
+    connection.on('current-users', (members) => { console.log(members); });
+    connection.on('button-assigned', (button) => { console.log(button); });
   }
 
   render() {
-    // const { user, messages, members } = this.props;
-    // const { message } = this.state;
-
     return (
       <div className={styles.player}>
         <h3>Welcome to a random Player with React, Redux and SocketIO</h3>
