@@ -4,7 +4,17 @@ export function createConnection(url) {
   const connection = io(url);
 
   return {
-    on: (eventName, callback) => connection.on(eventName, callback),
-    emit: (eventName, data) => connection.emit(eventName, data)
+    on: onFunction,
+    emit: emitFunction
   };
+
+  function onFunction(eventName, callback) {
+    console.log(`----- on ${eventName} -----`);
+    return connection.on(eventName, callback);
+  }
+
+  function emitFunction(eventName, data) {
+    console.log(`----- emit ${eventName} -----`);
+    return connection.emit(eventName, data);
+  }
 }
