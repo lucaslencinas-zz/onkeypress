@@ -7,7 +7,7 @@ import actionTypes from './actionTypes';
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-describe('Chat actions', () => {
+describe('Room actions', () => {
   let store;
   let initialState;
   let expectedActions;

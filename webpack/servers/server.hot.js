@@ -7,7 +7,9 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../configs/config.hot';
+import errorMiddleware from './middlewares/errorMiddleware';
 import renderHTML from './renderHTML';
+import { api } from './api';
 import { initializeSocketConnection } from './sockets';
 
 require('css-modules-require-hook')({
@@ -27,6 +29,10 @@ app.use(webpackDevMiddleware(compiler, {
   historyApiFallback: true
 }));
 app.use(webpackHotMiddleware(compiler));
+
+app.use('/api/v1', api());
+
+app.use(errorMiddleware);
 
 app.use('/*', (req, res) => renderHTML(req, res));
 

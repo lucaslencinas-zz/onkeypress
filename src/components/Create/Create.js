@@ -21,7 +21,7 @@ class Create extends React.Component {
   }
 
   handleCreate() {
-    const { name, password } = this.state;
+    const { name, password } = this.state.room;
     this.props.onCreateRoom({ name, password });
   }
 

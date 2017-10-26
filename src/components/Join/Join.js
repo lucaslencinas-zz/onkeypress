@@ -9,8 +9,8 @@ class Join extends React.Component {
     this.handleJoin = this.handleJoin.bind(this);
     this.handleRoomNameChange = this.handleRoomNameChange.bind(this);
     this.handleRoomPasswordChange = this.handleRoomPasswordChange.bind(this);
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.state = { room: { name: '', password: '' }, username: '' };
+    this.handlePlayerNameChange = this.handlePlayerNameChange.bind(this);
+    this.state = { room: { name: '', password: '' }, playerName: '' };
   }
 
   handleRoomNameChange(e) {
@@ -21,17 +21,20 @@ class Join extends React.Component {
     this.setState({ room: { ...this.state.room, password: e.target.value } });
   }
 
-  handleUsernameChange(e) {
-    this.setState({ username: e.target.value });
+  handlePlayerNameChange(e) {
+    this.setState({ playerName: e.target.value });
   }
 
   handleJoin() {
-    const { name, password, username } = this.state;
-    this.props.onJoinRoom({ name, password, username });
+    const { room, playerName } = this.state;
+    this.props.onJoinRoom({
+      room: { ...room, slug: room.name.replace(/ /g, '_') },
+      player: { name: playerName, slug: playerName.replace(/ /g, '_') }
+    });
   }
 
   render() {
-    const { room, username } = this.state;
+    const { room, playerName } = this.state;
 
     return (
       <div className={styles.join}>
@@ -63,13 +66,13 @@ class Join extends React.Component {
           </div>
           <div className={styles.formRow}>
             <div className={styles.label}>
-              Username:
+              Player Name:
             </div>
             <input
-              placeholder={'Username'}
-              className={styles.inputUsername}
-              value={username}
-              onChange={this.handleUsernameChange}
+              placeholder={'Player Name'}
+              className={styles.inputPlayerName}
+              value={playerName}
+              onChange={this.handlePlayerNameChange}
               autoFocus
             />
           </div>

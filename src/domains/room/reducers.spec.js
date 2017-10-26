@@ -1,6 +1,6 @@
 import reducers from './reducers';
 
-describe('Chat reducers', () => {
+describe('Room reducers', () => {
   let state;
   let action;
   let result;

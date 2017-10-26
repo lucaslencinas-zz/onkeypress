@@ -1,6 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import * as socketio from '~/utils/socket.io';
+import PropTypes from 'prop-types';
+import * as socketio from '~/utils/socket.io';
 import styles from './Player.css';
 
 class Player extends React.Component {
@@ -10,19 +10,30 @@ class Player extends React.Component {
     // this.handleSend = this.handleSend.bind(this);
     // this.handleMessageChange = this.handleMessageChange.bind(this);
     // this.handleKeyPress = this.handleKeyPress.bind(this);
-    // this.state = { message: '', connection: socketio.createConnection() };
-    // this.initializeSocketClient(this.state.connection);
+    this.state = { connection: socketio.createConnection() };
+    this.initializeSocketClient(this.state.connection);
   }
 
-  // initializeSocketClient(connection) {
-    // const handshake = { user: this.props.user };
+  initializeSocketClient(connection) {
+    const handshake = { player: this.props.player, room: this.props.room };
 
-    // connection.emit('user-connected', handshake);
-    // connection.on('user-connected', (member) => this.props.onAddMember(member));
-    // connection.on('current-users', (members) => this.props.onAddCurrentMembers(members));
+    connection.emit('player-connected', handshake);
+    connection.on('room-connected', (room) => {
+      console.log(room);
+    // this.props.onAddMember(member)
+    });
+    connection.on('current-users', (members) => {
+      console.log(members);
+    // this.props.onAddCurrentMembers(members)
+    });
+
+    connection.on('button-assigned', (button) => {
+      console.log(button);
+    // this.props.onButtonAssigned(button)
+    });
     // connection.on('new-message', (msg) => this.props.onAddMessage(msg));
     // connection.on('user-disconnected', (member) => this.props.onRemoveMember(member));
-  // }
+  }
 
   render() {
     // const { user, messages, members } = this.props;
@@ -39,6 +50,9 @@ class Player extends React.Component {
   }
 }
 
-Player.propTypes = {};
+Player.propTypes = {
+  player: PropTypes.object,
+  room: PropTypes.object
+};
 
 export default Player;

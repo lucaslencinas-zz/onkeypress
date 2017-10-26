@@ -1,11 +1,11 @@
 import selectors from './selectors';
 
-describe('Chat Selectors', () => {
+describe('Room Selectors', () => {
   let state;
 
   beforeEach(() => {
     state = {
-      chat: {
+      room: {
         user: { name: 'lucas' }
       }
     };
