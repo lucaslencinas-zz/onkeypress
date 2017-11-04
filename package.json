@@ -18,6 +18,7 @@
     "cors": "~2.8.3",
     "css-modules-require-hook": "~4.0.1",
     "express": "~4.13.4",
+    "ioredis": "^3.2.1",
     "node-fetch": "~1.6.3",
     "postcss-import": "~8.1.2",
     "postcss-nested": "~1.0.0",

@@ -4,12 +4,14 @@ import express from 'express';
 import socketIO from 'socket.io';
 import http from 'http';
 import webpack from 'webpack';
+import Redis from 'ioredis';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../configs/config.hot';
 import errorMiddleware from './middlewares/errorMiddleware';
 import renderHTML from './renderHTML';
 import { api } from './api';
+import localStore from './repositories/localStore';
 import { initializeSocketConnection } from './sockets';
 
 require('css-modules-require-hook')({
@@ -44,4 +46,9 @@ server.listen(config.uri.port, config.hostname, (error) => {
   }
 });
 
+if (config.storage.type === 'redis') {
+  global.storage = new Redis(config.storage.redis);
+} else {
+  global.storage = localStore();
+}
 initializeSocketConnection(io);
