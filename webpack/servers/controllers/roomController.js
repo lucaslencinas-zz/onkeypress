@@ -3,8 +3,10 @@ const roomService = require('../services/roomService');
 /*
 req.body: { name, password, slug, availableButtons }
 */
-function post(req, res) {
+function create(req, res) {
   const room = req.body;
+  console.log('inside controller');
+  console.log(req.body);
 
   return roomService.create(room)
     .then((createdRoom) => res.status(201).json(createdRoom));
@@ -19,6 +21,6 @@ function join(req, res) {
 }
 
 module.exports = {
-  post,
+  create,
   join
 };

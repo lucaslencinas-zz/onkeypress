@@ -6,7 +6,8 @@ export function createRoom({ name, password }) {
     name,
     password,
     slug: name,
-    availableButtons: ['UP', 'DOWN', 'LEFT', 'RIGTH']
+    maxPlayers: 4,
+    buttons: ['UP', 'DOWN', 'LEFT', 'RIGHT']
   };
 
   const url = format({

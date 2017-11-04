@@ -11,6 +11,8 @@ module.exports = function errorMiddleware(err, req, res, next) {
     message: err.message
   };
 
+  console.log(err);
+
   res.status(err.status).json(responseError);
 
   return next(err);
