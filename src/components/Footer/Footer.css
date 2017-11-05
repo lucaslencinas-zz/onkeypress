@@ -1,0 +1,9 @@
+:local {
+  .footer {
+    display: flex;
+
+    .left {}
+
+    .right {}
+  }
+}

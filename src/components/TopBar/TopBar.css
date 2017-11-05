@@ -1,0 +1,9 @@
+:local {
+  .topBar {
+    display: flex;
+
+    .left {}
+
+    .right {}
+  }
+}

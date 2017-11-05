@@ -4,6 +4,7 @@ import Route from 'react-router/lib/Route';
 import Home from './components/Home';
 import Join from './containers/Join';
 import Room from './containers/Room';
+import Games from './containers/Games';
 import Player from './containers/Player';
 import Create from './containers/Create';
 import Layout from './containers/Layout';
@@ -27,6 +28,11 @@ export default (
       name="Create"
       path="/create"
       component={Create}
+    />
+    <Route
+      name="Games"
+      path="/games"
+      component={Games}
     />
     <Route
       name="Room"

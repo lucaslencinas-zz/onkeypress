@@ -1,5 +1,7 @@
 :local {
-  .home {
+  .hero {
     display: flex;
+
+    .heading {}
   }
 }

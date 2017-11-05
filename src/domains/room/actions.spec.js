@@ -14,26 +14,24 @@ describe('Room actions', () => {
 
   beforeEach(() => {
     initialState = {
-      user: {},
-      members: [],
-      messages: []
+      room: {}
     };
   });
 
-  describe('addMessage()', () => {
+  describe('addPlayer()', () => {
     beforeEach(() => {
       store = mockStore(initialState);
     });
 
     context('When the message was added successfully', () => {
-      let message;
-      let user;
+      let player;
+      let room;
 
       beforeEach(() => {
-        user = { id: '456', name: 'lucas' };
-        message = { id: '123', text: 'hola', user };
-        expectedActions = [{ type: actionTypes.ADD_MESSAGE, message }];
-        return store.dispatch(actions.addMessage(message));
+        player = { slug: 'lucas', name: 'lucas' };
+        room = { slug: 'room1', pass: 'room1' };
+        expectedActions = [{ type: actionTypes.ADD_PLAYER, player, room }];
+        return store.dispatch(actions.addPlayer({ player, room }));
       });
 
       it('executes the expected actions', () => (
