@@ -13,21 +13,6 @@ function buildHTML() {
       <meta charset="utf-8">
       <title>React Node Template</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <style>
-        html, body, #root {
-          display: block;
-          width: 100%;
-          height: 100%;
-          margin: 0;
-          padding: 0;
-          overflow: auto;
-          color: #24292e;
-          font-family: 'Open Sans', sans-serif;
-        }
-        * {
-          box-sizing: border-box;
-        }
-      </style>
     </head>
     <body>
       <div id="root"></div>

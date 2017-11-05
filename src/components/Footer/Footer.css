@@ -1,9 +1,15 @@
 :local {
   .footer {
     display: flex;
+    justify-content: space-between;
 
-    .left {}
+    .right {
+      display: flex;
+      flex-wrap: wrap;
 
-    .right {}
+      span {
+        margin: 0 5px;
+      }
+    }
   }
 }

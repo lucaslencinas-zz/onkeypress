@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as socketio from '~/utils/socket.io';
+import Players from './Players';
+import Buttons from './Buttons';
+import Logs from './Logs';
+import Header from './Header';
+import Board from './Board';
 import styles from './Room.css';
 
 class Room extends React.Component {
@@ -32,29 +37,15 @@ class Room extends React.Component {
     const { room } = this.props;
     return (
       <div className={styles.room}>
-        <h3>Welcome to a random Room with React, Redux and SocketIO</h3>
-        <div className={styles.content}>
-          <div className={styles.topPanel}>
-            Board vacio...
+        <div className={styles.main}>
+          <Players players={room.players} />
+          <div className={styles.center}>
+            <Header room={room} />
+            <Board />
           </div>
-          <div className={styles.bottomPanel}>
-            <div className={styles.players}>
-              {(room.players || []).map((player) => (
-                <div key={player.slug} className={styles.player}>
-                  <span className={styles.name}>
-                    {player.name}
-                  </span>
-                  <span className={styles.button} display-if={player.buttonAssigned}>
-                    {player.buttonAssigned}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className={styles.logs}>
-              logs
-            </div>
-          </div>
+          <Logs messages={room.messages} />
         </div>
+        <Buttons players={room.players} />
       </div>
     );
   }

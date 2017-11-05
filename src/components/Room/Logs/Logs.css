@@ -1,5 +1,5 @@
 :local {
-  .home {
+  .logs {
     display: flex;
     flex-direction: column;
   }

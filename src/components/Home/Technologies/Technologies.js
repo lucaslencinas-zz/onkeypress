@@ -22,9 +22,7 @@ const technologies = [
 
 const Technologies = () => (
   <div className={styles.technologies}>
-    <div className={styles.title}>
-      <h3>Technologies</h3>
-    </div>
+    <h3>Technologies</h3>
     <div className={styles.list}>
       {technologies.map((tech, i) => <Technology tech={tech} key={`${i + 1}`} />)}
     </div>

@@ -1,12 +1,35 @@
+:global {
+  html {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
+
+    & > #root {
+      height: 100%;
+
+      & > div {
+        height: 100%;
+      }
+    }
+
+    h3 {
+      text-align: center;
+    }
+  }
+}
+
 :local {
   .layout {
     display: flex;
-    height: 100%;
-    padding-top: 20px;
+    flex-direction: column;
 
     .content {
       flex: 1;
-      height: 100%;
     }
   }
 }

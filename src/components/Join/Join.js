@@ -38,12 +38,12 @@ class Join extends React.Component {
 
     return (
       <div className={styles.join}>
-        <h3>Enter the name and password for the room you want to enter</h3>
+        <h3>Join Room</h3>
         <div className={styles.form}>
           <div className={styles.formRow}>
-            <div className={styles.label}>
+            <span className={styles.label}>
               Room name:
-            </div>
+            </span>
             <input
               placeholder={'Name'}
               className={styles.inputRoomName}
@@ -53,9 +53,9 @@ class Join extends React.Component {
             />
           </div>
           <div className={styles.formRow}>
-            <div className={styles.label}>
+            <span className={styles.label}>
               Password:
-            </div>
+            </span>
             <input
               placeholder={'Password'}
               className={styles.inputRoomPassword}
@@ -65,9 +65,9 @@ class Join extends React.Component {
             />
           </div>
           <div className={styles.formRow}>
-            <div className={styles.label}>
+            <span className={styles.label}>
               Player Name:
-            </div>
+            </span>
             <input
               placeholder={'Player Name'}
               className={styles.inputPlayerName}
@@ -76,22 +76,22 @@ class Join extends React.Component {
               autoFocus
             />
           </div>
-        </div>
-        <div className={styles.buttons}>
-          <input
-            type="button"
-            className={styles.button}
-            value={'Cancel'}
-            onClick={this.props.onCancel}
-            autoFocus
-          />
-          <input
-            type="button"
-            className={styles.button}
-            value={'Join'}
-            onClick={this.handleJoin}
-            autoFocus
-          />
+          <div className={styles.buttons}>
+            <input
+              type="button"
+              className={styles.button}
+              value={'Cancel'}
+              onClick={this.props.onCancel}
+              autoFocus
+            />
+            <input
+              type="button"
+              className={styles.button}
+              value={'Join'}
+              onClick={this.handleJoin}
+              autoFocus
+            />
+          </div>
         </div>
       </div>
     );

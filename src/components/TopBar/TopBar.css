@@ -1,9 +1,6 @@
 :local {
   .topBar {
     display: flex;
-
-    .left {}
-
-    .right {}
+    justify-content: space-between;
   }
 }
