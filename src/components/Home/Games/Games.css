@@ -1,5 +1,14 @@
 :local {
   .games {
     display: flex;
+    flex-direction: column;
+
+    .cards {
+      display: flex;
+      justify-content: space-around;
+
+
+      .card {}
+    }
   }
 }

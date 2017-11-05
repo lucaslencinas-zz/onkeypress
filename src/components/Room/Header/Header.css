@@ -1,5 +1,5 @@
 :local {
-  .home {
+  .header {
     display: flex;
     flex-direction: column;
   }

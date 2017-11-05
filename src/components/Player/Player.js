@@ -23,9 +23,17 @@ class Player extends React.Component {
   render() {
     return (
       <div className={styles.player}>
-        <h3>Welcome to a random Player with React, Redux and SocketIO</h3>
+        <h3>Room - Snake - RoomName</h3>
         <div className={styles.content}>
-          Content del Player
+          <button className={styles.gameButton}>
+            Button inside game
+          </button>
+          <button className={styles.button}>
+            Ready
+          </button>
+          <div className={styles.logs}>
+            TextArea for logs
+          </div>
         </div>
       </div>
     );

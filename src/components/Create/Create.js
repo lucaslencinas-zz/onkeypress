@@ -29,13 +29,13 @@ class Create extends React.Component {
     const { room } = this.state;
 
     return (
-      <div className={styles.join}>
-        <h3>Enter the name and password for the room you want to create</h3>
+      <div className={styles.create}>
+        <h3>Create Room</h3>
         <div className={styles.form}>
           <div className={styles.formRow}>
-            <div className={styles.label}>
+            <span className={styles.label}>
               Room name:
-            </div>
+            </span>
             <input
               placeholder={'Name'}
               className={styles.input}
@@ -45,9 +45,9 @@ class Create extends React.Component {
             />
           </div>
           <div className={styles.formRow}>
-            <div className={styles.label}>
+            <span className={styles.label}>
               Password:
-            </div>
+            </span>
             <input
               placeholder={'Password'}
               className={styles.input}
@@ -56,9 +56,9 @@ class Create extends React.Component {
             />
           </div>
           <div className={styles.formRow}>
-            <div className={styles.label}>
+            <span className={styles.label}>
               Game:
-            </div>
+            </span>
             <input
               placeholder={'Game'}
               className={styles.input}
@@ -67,9 +67,9 @@ class Create extends React.Component {
             />
           </div>
           <div className={styles.formRow}>
-            <div className={styles.label}>
+            <span className={styles.label}>
               Players:
-            </div>
+            </span>
             <input
               placeholder={'Players'}
               className={styles.input}
@@ -77,20 +77,20 @@ class Create extends React.Component {
               disabled
             />
           </div>
-        </div>
-        <div className={styles.buttons}>
-          <input
-            type="button"
-            className={styles.button}
-            value={'Cancel'}
-            onClick={this.props.onCancel}
-          />
-          <input
-            type="button"
-            className={styles.button}
-            value={'Create'}
-            onClick={this.handleCreate}
-          />
+          <div className={styles.buttons}>
+            <input
+              type="button"
+              className={styles.button}
+              value={'Cancel'}
+              onClick={this.props.onCancel}
+            />
+            <input
+              type="button"
+              className={styles.button}
+              value={'Create'}
+              onClick={this.handleCreate}
+            />
+          </div>
         </div>
       </div>
     );

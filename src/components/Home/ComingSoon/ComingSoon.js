@@ -3,9 +3,7 @@ import styles from './ComingSoon.css';
 
 const ComingSoon = () => (
   <div className={styles.comingSoon}>
-    <div className={styles.title}>
-      <h3>Coming Soon</h3>
-    </div>
+    <h3>Coming Soon</h3>
     <div className={styles.columns}>
       <div className={styles.column}>
         <ul>

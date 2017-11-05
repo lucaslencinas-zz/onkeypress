@@ -1,5 +1,5 @@
 :local {
-  .home {
+  .players {
     display: flex;
     flex-direction: column;
   }

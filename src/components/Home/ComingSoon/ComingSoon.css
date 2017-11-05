@@ -1,5 +1,11 @@
 :local {
   .coming-soon {
     display: flex;
+    flex-direction: column;
+
+    .columns {
+      display: flex;
+      justify-content: space-around;
+    }
   }
 }

@@ -1,12 +1,11 @@
 :local {
-  .player {
+  .buttons {
     display: flex;
     flex-direction: column;
 
     .content {
       display: flex;
-      flex-direction: column;
-      align-self: center;
+      justify-content: center;
     }
   }
 }

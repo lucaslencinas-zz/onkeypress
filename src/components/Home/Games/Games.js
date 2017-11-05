@@ -4,9 +4,7 @@ import styles from './Games.css';
 
 const Games = () => (
   <div className={styles.games}>
-    <div className={styles.title}>
-      <h3>Games</h3>
-    </div>
+    <h3>Games</h3>
     <div className={styles.cards}>
       {games.slice(0, 3).map((game, i) => <Card game={game} key={`${i + 1}`} />)}
     </div>
@@ -20,8 +18,8 @@ export default Games;
 const Card = ({ game }) => (
   <div className={styles.card}>
     <h5>{game.name}</h5>
-    <span>{game.img}</span>
-    <span>{game.status}</span>
+    <div>{game.img}</div>
+    <div>{game.status}</div>
   </div>
 );
 

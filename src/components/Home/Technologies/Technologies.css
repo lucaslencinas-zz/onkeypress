@@ -1,5 +1,11 @@
 :local {
   .technologies {
     display: flex;
+    flex-direction: column;
+
+    .list {
+      display: flex;
+      justify-content: space-around;
+    }
   }
 }
