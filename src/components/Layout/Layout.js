@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TopBar from '~/components/TopBar';
+import Footer from '~/components/Footer';
+import AlertMessage from './AlertMessage';
 import styles from './Layout.css';
 
 const Layout = ({
@@ -8,17 +11,12 @@ const Layout = ({
   onCloseAlert
 }) => (
   <div className={styles.layout}>
-    <div display-if={alert} className={styles.alert}>
-      <div className={styles.alertMessage}>
-        {alert.message}
-      </div>
-      <div className={styles.alertClose} onClick={onCloseAlert}>
-        X
-      </div>
-    </div>
+    <TopBar />
+    <AlertMessage display-if={alert} alert={alert} onClose={onCloseAlert} />
     <div className={styles.content}>
       {children}
     </div>
+    <Footer />
   </div>
 );
 

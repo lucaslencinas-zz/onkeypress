@@ -8,9 +8,7 @@ describe('Room reducers', () => {
   context('when the state is empty', () => {
     beforeEach(() => {
       state = {
-        user: {},
-        members: [],
-        messages: []
+        room: {}
       };
     });
 

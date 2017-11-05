@@ -5,8 +5,6 @@ req.body: { name, password, slug, availableButtons }
 */
 function create(req, res) {
   const room = req.body;
-  console.log('inside controller');
-  console.log(req.body);
 
   return roomService.create(room)
     .then((createdRoom) => res.status(201).json(createdRoom));

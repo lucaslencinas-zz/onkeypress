@@ -39,7 +39,7 @@ class Room extends React.Component {
           </div>
           <div className={styles.bottomPanel}>
             <div className={styles.players}>
-              {room.players.map((player) => (
+              {(room.players || []).map((player) => (
                 <div key={player.slug} className={styles.player}>
                   <span className={styles.name}>
                     {player.name}

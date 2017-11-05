@@ -6,12 +6,12 @@ describe('Room Selectors', () => {
   beforeEach(() => {
     state = {
       room: {
-        user: { name: 'lucas' }
+        player: { name: 'lucas' }
       }
     };
   });
 
-  it('the user retrieves the user string', () => {
-    selectors.user(state).should.eql({ name: 'lucas' });
+  it('the user retrieves the player', () => {
+    selectors.player(state).should.eql({ name: 'lucas' });
   });
 });

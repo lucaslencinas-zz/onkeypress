@@ -4,18 +4,9 @@ import Home from './Home';
 
 describe('Home', () => {
   let home;
-  let homeTitle;
-  let onEnter;
 
   beforeEach(() => {
-    homeTitle = 'A title';
-    onEnter = sandbox.stub();
-
-    home = shallow(
-      <Home
-        homeTitle={homeTitle}
-        onEnter={onEnter}
-      />);
+    home = shallow(<Home />);
   });
 
   it('renders the Home', () => {

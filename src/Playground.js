@@ -11,8 +11,7 @@ let render = () => {
 };
 
 if (module.hot) {
-  // Support hot reloading of components
-  // and display an overlay for runtime errors
+  // Support hot reloading of components and display an overlay for runtime errors
   const renderApp = render;
   const renderError = (error) => {
     // eslint-disable-next-line global-require
