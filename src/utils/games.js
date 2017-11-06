@@ -31,6 +31,14 @@ const games = [
   }
 ];
 
+const snake = {
+  name: 'Snake',
+  maxPlayers: 4,
+  buttons: ['UP', 'DOWN', 'LEFT', 'RIGHT'],
+  teams: 1
+};
+
 module.exports = {
-  games
+  games,
+  snake
 };

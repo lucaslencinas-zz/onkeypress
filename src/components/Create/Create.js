@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { snake } from '~/utils/games';
 import styles from './Create.css';
 
 class Create extends React.Component {
@@ -62,7 +63,7 @@ class Create extends React.Component {
             <input
               placeholder={'Game'}
               className={styles.input}
-              value={'Snake'}
+              value={snake.game}
               disabled
             />
           </div>
@@ -73,7 +74,29 @@ class Create extends React.Component {
             <input
               placeholder={'Players'}
               className={styles.input}
-              value={'4'}
+              value={snake.maxPlayers}
+              disabled
+            />
+          </div>
+          <div className={styles.formRow}>
+            <span className={styles.label}>
+              Teams:
+            </span>
+            <input
+              placeholder={'Players'}
+              className={styles.input}
+              value={snake.teams}
+              disabled
+            />
+          </div>
+          <div className={styles.formRow}>
+            <span className={styles.label}>
+              Buttons:
+            </span>
+            <input
+              placeholder={'Players'}
+              className={styles.input}
+              value={JSON.stringify(snake.buttons)}
               disabled
             />
           </div>

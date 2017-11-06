@@ -1,3 +1,5 @@
+import config from 'config';
+import { snake } from '~/utils/games';
 import { format } from 'url';
 import 'whatwg-fetch';
 
@@ -6,14 +8,12 @@ export function createRoom({ name, password }) {
     name,
     password,
     slug: name,
-    maxPlayers: 4,
-    buttons: ['UP', 'DOWN', 'LEFT', 'RIGHT']
+    ...snake
   };
 
   const url = format({
-    hostname: '0.0.0.0',
-    port: 3000,
-    pathname: 'api/v1/rooms'
+    ...config.api,
+    pathname: `${config.api.baseUri}/rooms`
   });
 
   return fetch(url, {
@@ -29,9 +29,8 @@ export function createRoom({ name, password }) {
 
 export function joinRoom({ room, player }) {
   const url = format({
-    hostname: '0.0.0.0',
-    port: 3000,
-    pathname: `api/v1/rooms/${room.slug}/join`
+    ...config.api,
+    pathname: `${config.api.baseUri}/rooms/${room.slug}/join`
   });
 
   return fetch(url, {

@@ -32,7 +32,7 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
-app.use('/api/v1', api());
+app.use(config.api.baseUri, api());
 
 app.use(errorMiddleware);
 
