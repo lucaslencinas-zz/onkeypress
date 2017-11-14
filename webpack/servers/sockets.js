@@ -68,7 +68,7 @@ function handleDisconnection(socket) {
 function handlePlayerDisconnection({ socket, playerSlug }) {
   return roomService.playerDisconnected({ socketId: socket.id, playerSlug })
     .then(({ room, disconnectedPlayer }) => {
-      socket.broadcast.emit(events.PLAYER_DISCONNECTED, { player: disconnectedPlayer });
+      socket.broadcast.emit(events.PLAYER_DISCONNECTED, disconnectedPlayer);
       return roomService.getPlayerToAssignButton(room)
         .then((player) => {
           if (player) return assignButtonToPlayer({ socket, room, player });

@@ -2,12 +2,10 @@ import { push } from 'react-router-redux';
 import * as roomService from '~/services/roomService';
 import actionTypes from './actionTypes';
 
-function setRoom({ name, password, slug }) {
+function setRoom(room) {
   return {
     type: actionTypes.SET_ROOM,
-    name,
-    password,
-    slug
+    room
   };
 }
 
@@ -22,6 +20,22 @@ export function addPlayer({ player, room }) {
   return {
     type: actionTypes.ADD_PLAYER,
     player,
+    room
+  };
+}
+
+export function removePlayer({ player, room }) {
+  return {
+    type: actionTypes.REMOVE_PLAYER,
+    player,
+    room
+  };
+}
+
+export function setCurrentPlayers({ players, room }) {
+  return {
+    type: actionTypes.SET_CURRENT_PLAYERS,
+    players,
     room
   };
 }

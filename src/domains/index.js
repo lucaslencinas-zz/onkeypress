@@ -9,6 +9,13 @@ import {
 } from './room';
 
 import {
+  actions as logsActions,
+  actionTypes as logsActionTypes,
+  selectors as logsSelectors,
+  reducers as logsReducers
+} from './logs';
+
+import {
   actions as uiActions,
   actionTypes as uiActionTypes,
   selectors as uiSelectors,
@@ -17,21 +24,25 @@ import {
 
 const actions = {
   ...roomActions,
+  ...logsActions,
   ...uiActions
 };
 
 const actionTypes = {
   ...roomActionTypes,
+  ...logsActionTypes,
   ...uiActionTypes
 };
 
 const selectors = {
   ...roomSelectors,
+  ...logsSelectors,
   ...uiSelectors
 };
 
 const reducers = combineReducers({
   room: roomReducers,
+  logs: logsReducers,
   ui: uiReducers,
   reduxAsyncConnect: reduxAsyncReducer
 });

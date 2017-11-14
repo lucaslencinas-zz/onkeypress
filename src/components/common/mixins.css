@@ -1,0 +1,5 @@
+@define-mixin shadow-container {
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 1px #bbbbbb;
+  margin: 5px;
+}

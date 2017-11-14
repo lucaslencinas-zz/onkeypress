@@ -1,11 +1,26 @@
+@import "../../common/variables.css";
+@import "../../common/mixins.css";
+
 :local {
   .buttons {
     display: flex;
     flex-direction: column;
+    padding: 5px;
+    height: 30%;
+    background-color: $aluminum-2;
+    @mixin shadow-container;
 
     .content {
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
+      height: 100%;
+      align-items: center;
+
+      .button {
+        .icon {
+          text-align: center;
+        }
+      }
     }
   }
 }

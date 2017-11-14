@@ -1,7 +1,13 @@
+@import "../common/variables.css";
+
 :local {
   .footer {
     display: flex;
     justify-content: space-between;
+    padding: 10px;
+    background-color: $purple-1;
+    color: $aluminum-2;
+    font-family: 'Indie Flower', sans-serif;
 
     .right {
       display: flex;

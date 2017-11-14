@@ -32,7 +32,7 @@ const games = [
 ];
 
 const snake = {
-  name: 'Snake',
+  gameType: 'Snake',
   maxPlayers: 4,
   buttons: ['UP', 'DOWN', 'LEFT', 'RIGHT'],
   teams: 1

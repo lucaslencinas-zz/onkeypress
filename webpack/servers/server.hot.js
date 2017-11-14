@@ -33,6 +33,7 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 
 app.use(config.api.baseUri, api());
+app.use('/assets', express.static('src/static'));
 
 app.use(errorMiddleware);
 

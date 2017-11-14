@@ -1,6 +1,12 @@
+@import "../../common/variables.css";
+@import "../../common/mixins.css";
+
 :local {
   .board {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    background-color: $steel-3;
+    @mixin shadow-container;
   }
 }

@@ -1,3 +1,5 @@
+@import "../common/variables.css";
+
 :global {
   html {
     height: 100%;
@@ -7,7 +9,10 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Open Sans', sans-serif;
+    background-color: $aluminum-1;
+    color: $steel-3;
+    font-family: 'Source Sans Pro', sans-serif;
+    letter-spacing: 1px;
 
     & > #root {
       height: 100%;
@@ -19,6 +24,11 @@
 
     h3 {
       text-align: center;
+      color: $orange-1;
+    }
+
+    * {
+      box-sizing: border-box;
     }
   }
 }

@@ -13,6 +13,7 @@ function buildHTML() {
       <meta charset="utf-8">
       <title>React Node Template</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Source+Sans+Pro:300,400" rel="stylesheet">
     </head>
     <body>
       <div id="root"></div>

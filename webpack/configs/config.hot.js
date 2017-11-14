@@ -73,6 +73,10 @@ module.exports = {
     /* Enable extending placeholder selectors like Sass */
     // eslint-disable-next-line global-require
     require('postcss-simple-extend'),
+    // eslint-disable-next-line global-require
+    require('postcss-mixins'),
+    // eslint-disable-next-line global-require
+    require('postcss-math'),
     /* Enable Sass-like variables */
     // eslint-disable-next-line global-require
     require('postcss-simple-vars')

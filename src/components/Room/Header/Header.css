@@ -1,6 +1,26 @@
+@import "../../common/variables.css";
+@import "../../common/mixins.css";
+
 :local {
   .header {
     display: flex;
-    flex-direction: column;
+    padding: 5px;
+    background-color: $aluminum-2;
+    @mixin shadow-container;
+    justify-content: space-between;
+
+    .pass {
+      display: flex;
+      align-items: center;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .name {
+      display: flex;
+      align-items: center;
+    }
   }
 }

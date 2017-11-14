@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Players.css';
 
+const renderPlayer = ({ name, button = { name: 'Waiting' } }) => `${name} - ${button.name}`;
+
 const Players = ({ players = [] }) => (
   <div className={styles.players}>
-    {players.map((player) => (
-      <div key={player.slug} className={styles.player}>
-        <span className={styles.name}>
-          {player.name}
-        </span>
-        <span className={styles.button} display-if={player.buttonAssigned}>
-          {` - ${player.buttonAssigned || 'Waiting'}`}
-        </span>
-      </div>
-    ))}
+    <h4>Players:</h4>
+    <div className={styles.playerList}>
+      {players.map((player) => (
+        <div key={player.slug} className={styles.player}>
+          {renderPlayer(player)}
+        </div>
+      ))}
+    </div>
   </div>
 );
 

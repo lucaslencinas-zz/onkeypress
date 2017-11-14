@@ -1,7 +1,10 @@
+@import "../../common/variables.css";
+
 :local {
   .coming-soon {
     display: flex;
     flex-direction: column;
+    background-color: $aluminum-2;
 
     .columns {
       display: flex;
