@@ -6,7 +6,7 @@ const defaultButtons = ['LEFT', 'UP', 'DOWN', 'RIGHT'];
 
 const renderIcon = (button) => (button === 'UPs' ? renderSVG(button) : button);
 const renderPlayer = (button, players) => {
-  const player = players.find((p) => p.button.name === button);
+  const player = players.find((p) => (p.button || {}).name === button);
 
   return player ? player.name : 'Waiting';
 };
@@ -35,7 +35,7 @@ const Buttons = ({ players = [], buttons = defaultButtons }) => (
 );
 
 Buttons.propTypes = {
-  buttons: PropTypes.arrayOf(PropTypes.object),
+  buttons: PropTypes.arrayOf(PropTypes.string),
   players: PropTypes.arrayOf(PropTypes.object)
 };
 

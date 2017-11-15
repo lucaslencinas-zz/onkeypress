@@ -3,19 +3,19 @@ import roomService from './services/roomService';
 
 export function initializeSocketConnection(io) {
   io.on(events.CONNECTION, (socket) => {
-    initialize(socket);
+    initialize(io, socket);
   });
 }
 
-function initialize(socket) {
-  socket.on(events.PLAYER_CONNECTED, (handshake) => handlePlayerConnected(socket, handshake));
-  socket.on(events.ROOM_CONNECTED, (handshake) => handleRoomConnected(socket, handshake));
-  socket.on(events.BUTTON_CLICKED, (data) => handleButtonClicked(socket, data));
-  socket.on(events.DISCONNECTION, () => handleDisconnection(socket));
+function initialize(io, socket) {
+  socket.on(events.PLAYER_CONNECTED, (handshake) => handlePlayerConnected(io, socket, handshake));
+  socket.on(events.ROOM_CONNECTED, (handshake) => handleRoomConnected(io, socket, handshake));
+  socket.on(events.BUTTON_CLICKED, (data) => handleButtonClicked(io, socket, data));
+  socket.on(events.DISCONNECTION, () => handleDisconnection(io, socket));
 }
 
 /* handshake: { room: {slug, name} } */
-function handleRoomConnected(socket, handshake) {
+function handleRoomConnected(io, socket, handshake) {
   return roomService.roomConnected({ socketId: socket.id, slug: handshake.room.slug })
     .then((room) => {
       socket.broadcast.emit(events.ROOM_CONNECTED, room);
@@ -27,35 +27,34 @@ function handleRoomConnected(socket, handshake) {
 }
 
 /* handshake: { room: {slug, name}, player: {slug, name} } */
-function handlePlayerConnected(socket, handshake) {
+function handlePlayerConnected(io, socket, handshake) {
   return roomService.playerConnected({ socketId: socket.id, player: handshake.player, room: handshake.room })
     .then((player) => {
       socket.broadcast.emit(events.PLAYER_CONNECTED, player);
       return Promise.resolve(player);
     })
-    .then((player) => assignButtonToPlayer({ socket, room: handshake.room, player }))
+    .then((player) => assignButtonToPlayer({ io, socket, room: handshake.room, player }))
     .then((room) => roomService.currentPlayers(room))
-    .then((players) => Promise.resolve(socket.emit(events.CURRENT_PLAYERS, players)))
+    .then((players) => Promise.resolve(io.emit(events.CURRENT_PLAYERS, players)))
   ;
 }
 
-function assignButtonToPlayer({ socket, room, player }) {
+function assignButtonToPlayer({ io, room, player }) {
   return roomService.assignButtonToPlayer({ room, player })
     .then(({ $room, button, $player }) => {
       if (button) {
-        socket.broadcast.emit(events.BUTTON_ASSIGNED, { button, player: $player });
+        io.emit(events.BUTTON_ASSIGNED, { button, player: $player });
       }
       return Promise.resolve($room);
     })
   ;
 }
 
-/* data: { roomSlug, playerSlug, buttonId } */
-function handleButtonClicked(socket, data) {
+function handleButtonClicked(io, socket, data) {
   return Promise.resolve(socket.broadcast.emit(events.BUTTON_CLICKED, data));
 }
 
-function handleDisconnection(socket) {
+function handleDisconnection(io, socket) {
   return roomService.getDisconnected(socket.id)
     .then(({ slug, isPlayer }) => (
       isPlayer ?

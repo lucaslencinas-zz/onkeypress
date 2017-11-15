@@ -22,6 +22,7 @@ class Room extends React.Component {
       room,
       onAddPlayer,
       onRemovePlayer,
+      onButtonClicked,
       onCurrentPlayers,
       onButtonAssigned
     } = this.props;
@@ -32,6 +33,7 @@ class Room extends React.Component {
     connection.on(events.PLAYER_DISCONNECTED, (player) => onRemovePlayer({ room, player }));
     connection.on(events.CURRENT_PLAYERS, (players) => onCurrentPlayers({ room, players }));
     connection.on(events.BUTTON_ASSIGNED, (assignment) => onButtonAssigned({ assignment, room }));
+    connection.on(events.BUTTON_CLICKED, (action) => onButtonClicked({ action, room }));
   }
 
   render() {
@@ -58,6 +60,7 @@ Room.propTypes = {
   logs: PropTypes.arrayOf(PropTypes.object),
   onAddPlayer: PropTypes.func,
   onRemovePlayer: PropTypes.func,
+  onButtonClicked: PropTypes.func,
   onCurrentPlayers: PropTypes.func,
   onButtonAssigned: PropTypes.func
 };

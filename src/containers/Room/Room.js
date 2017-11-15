@@ -20,6 +20,9 @@ const roomAction = (dispatch) => ({
     dispatch(actions.assignButton(payload));
     dispatch(actions.logButtonAssigned(payload));
   },
+  onButtonClicked: (payload) => {
+    dispatch(actions.logButtonClicked(payload));
+  },
   onCurrentPlayers: (payload) => {
     dispatch(actions.setCurrentPlayers(payload));
     dispatch(actions.logCurrentPlayers(payload));

@@ -85,13 +85,13 @@ export function logButtonUnassigned({ assignment, player, room }) {
   });
 }
 
-export function logButtonClicked({ button, player, room }) {
+export function logButtonClicked({ action, room }) {
   return addLogEntry({
     room,
     log: {
-      event: logTypes.BUTTON_ASSIGNED,
-      entity: player.name,
-      content: `pressed button ${button.name}`
+      event: logTypes.BUTTON_CLICKED,
+      entity: action.player.name,
+      content: `pressed button ${action.button.name}`
     }
   });
 }

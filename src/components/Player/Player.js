@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as socketio from '~/utils/socket.io';
+import * as events from '~/utils/events';
 import styles from './Player.css';
 
 class Player extends React.Component {
@@ -9,15 +10,28 @@ class Player extends React.Component {
 
     this.state = { connection: socketio.createConnection() };
     this.initializeSocketClient(this.state.connection);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   initializeSocketClient(connection) {
     const handshake = { player: this.props.player, room: this.props.room };
 
-    connection.emit('player-connected', handshake);
-    connection.on('room-connected', (room) => { console.log(room); });
-    connection.on('current-users', (members) => { console.log(members); });
-    connection.on('button-assigned', (button) => { console.log(button); });
+    connection.emit(events.PLAYER_CONNECTED, handshake);
+    connection.on(events.ROOM_CONNECTED, (room) => { console.log(room); });
+    connection.on(events.CURRENT_PLAYERS, (players) => { console.log(players); });
+    connection.on(events.BUTTON_ASSIGNED, ({ button, player }) => {
+      console.log(button);
+      if (this.props.player.slug === player.slug) {
+        this.setState({ button });
+      }
+    });
+  }
+
+  handleClick() {
+    const { connection, button } = this.state;
+    if (button) {
+      connection.emit(events.BUTTON_CLICKED, { button, player: this.props.player });
+    }
   }
 
   render() {
@@ -25,10 +39,10 @@ class Player extends React.Component {
       <div className={styles.player}>
         <h3>Room - Snake - RoomName</h3>
         <div className={styles.content}>
-          <button className={styles.gameButton}>
+          <button className={styles.gameButton} onClick={this.handleClick}>
             Button inside game
           </button>
-          <button className={styles.button}>
+          <button className={styles.button} disabled>
             Ready
           </button>
           <div className={styles.logs}>
