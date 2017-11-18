@@ -1,0 +1,11 @@
+@import "../../common/variables.css";
+@import "../../common/mixins.css";
+
+:local {
+  .button {
+    .icon {
+      text-align: center;
+
+    }
+  }
+}

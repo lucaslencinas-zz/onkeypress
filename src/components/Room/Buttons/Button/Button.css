@@ -1,0 +1,23 @@
+@import "../../../common/variables.css";
+@import "../../../common/mixins.css";
+
+:local {
+  .button {
+    .icon {
+      display: flex;
+      text-align: center;
+
+      .inner-icon {
+        width: 75px;
+
+        svg {
+          fill: $steel-1;
+        }
+      }
+    }
+
+    .player {
+      text-align: center;
+    }
+  }
+}
