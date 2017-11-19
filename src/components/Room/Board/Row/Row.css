@@ -1,0 +1,6 @@
+:local {
+  .row {
+    display: flex;
+    flex: 1;
+  }
+}

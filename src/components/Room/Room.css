@@ -10,7 +10,7 @@
     .main {
       display: flex;
       justify-content: space-between;
-      height: 70%;
+      height: 80%;
 
       .center {
         display: flex;

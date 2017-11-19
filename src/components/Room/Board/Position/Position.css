@@ -1,0 +1,13 @@
+:local {
+  .position {
+    flex: 1;
+  }
+
+  .snake {
+    background-color: green;
+  }
+
+  .food {
+    background-color: yellow;
+  }
+}
