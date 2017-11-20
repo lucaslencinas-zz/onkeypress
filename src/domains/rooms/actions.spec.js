@@ -7,14 +7,14 @@ import actionTypes from './actionTypes';
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-describe('Room actions', () => {
+describe('Rooms actions', () => {
   let store;
   let initialState;
   let expectedActions;
 
   beforeEach(() => {
     initialState = {
-      room: {}
+      rooms: {}
     };
   });
 

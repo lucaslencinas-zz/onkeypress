@@ -1,8 +1,6 @@
 import actionTypes from './actionTypes';
 
-const initialState = {
-  room: {}
-};
+const initialState = {};
 
 const removePlayerFromList = (players, player) => players.filter((p) => p.slug !== player.slug);
 
@@ -17,20 +15,14 @@ export default function reducers(state = initialState, action) {
     case actionTypes.SET_ROOM:
       return {
         ...state,
-        room: { ...action.room, players: action.room.players || [] }
-      };
-
-    case actionTypes.SET_PLAYER:
-      return {
-        ...state,
-        player: action.player
+        [action.room.slug]: { ...action.room, players: action.room.players || [] }
       };
 
     case actionTypes.SET_CURRENT_PLAYERS:
       return {
         ...state,
-        room: {
-          ...state.room,
+        [action.room.slug]: {
+          ...state[action.room.slug],
           players: action.players
         }
       };
@@ -38,27 +30,33 @@ export default function reducers(state = initialState, action) {
     case actionTypes.ADD_PLAYER:
       return {
         ...state,
-        room: {
-          ...state.room,
-          players: state.room.players.concat([action.player])
+        [action.room.slug]: {
+          ...state[action.room.slug],
+          players: state[action.room.slug].players.concat([action.player])
         }
       };
 
     case actionTypes.REMOVE_PLAYER:
       return {
         ...state,
-        room: {
-          ...state.room,
-          players: removePlayerFromList(state.room.players, action.player)
+        [action.room.slug]: {
+          ...state[action.room.slug],
+          players: removePlayerFromList(
+            state[action.room.slug].players,
+            action.player
+          )
         }
       };
 
     case actionTypes.ASSIGN_BUTTON:
       return {
         ...state,
-        room: {
-          ...state.room,
-          players: updatePlayerInList(state.room.players, { ...action.player, button: action.button })
+        [action.room.slug]: {
+          ...state[action.room.slug],
+          players: updatePlayerInList(
+            state[action.room.slug].players,
+            { ...action.player, button: action.button }
+          )
         }
       };
 

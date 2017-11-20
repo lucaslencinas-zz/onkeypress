@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import { reducer as reduxAsyncReducer } from 'redux-connect';
 
 import {
-  actions as roomActions,
-  actionTypes as roomActionTypes,
-  selectors as roomSelectors,
-  reducers as roomReducers
-} from './room';
+  actions as roomsActions,
+  actionTypes as roomsActionTypes,
+  selectors as roomsSelectors,
+  reducers as roomsReducers
+} from './rooms';
 
 import {
   actions as logsActions,
@@ -22,28 +22,39 @@ import {
   reducers as uiReducers
 } from './ui';
 
+import {
+  actions as playersActions,
+  actionTypes as playersActionTypes,
+  selectors as playersSelectors,
+  reducers as playersReducers
+} from './players';
+
 const actions = {
-  ...roomActions,
+  ...roomsActions,
   ...logsActions,
-  ...uiActions
+  ...uiActions,
+  ...playersActions
 };
 
 const actionTypes = {
-  ...roomActionTypes,
+  ...roomsActionTypes,
   ...logsActionTypes,
-  ...uiActionTypes
+  ...uiActionTypes,
+  ...playersActionTypes
 };
 
 const selectors = {
-  ...roomSelectors,
+  ...roomsSelectors,
   ...logsSelectors,
-  ...uiSelectors
+  ...uiSelectors,
+  ...playersSelectors
 };
 
 const reducers = combineReducers({
-  room: roomReducers,
+  rooms: roomsReducers,
   logs: logsReducers,
   ui: uiReducers,
+  players: playersReducers,
   reduxAsyncConnect: reduxAsyncReducer
 });
 

@@ -3,7 +3,7 @@ import { Room } from '~/components';
 import { selectors, actions } from '~/domains';
 
 const roomState = (state, { params }) => ({
-  room: selectors.room(state),
+  room: selectors.room(state, params.roomSlug),
   logs: selectors.logs(state, params.roomSlug)
 });
 

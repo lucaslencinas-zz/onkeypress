@@ -1,18 +1,12 @@
 import { push } from 'react-router-redux';
 import * as roomService from '~/services/roomService';
 import actionTypes from './actionTypes';
+import { actions as playersActions } from '../players/';
 
 function setRoom(room) {
   return {
     type: actionTypes.SET_ROOM,
     room
-  };
-}
-
-function setPlayer(player) {
-  return {
-    type: actionTypes.SET_PLAYER,
-    player
   };
 }
 
@@ -63,7 +57,7 @@ export function joinRoom({ room, player }) {
     roomService.joinRoom({ room, player })
       .then((joined) => {
         dispatch(setRoom(joined.room));
-        dispatch(setPlayer(joined.player));
+        dispatch(playersActions.setPlayer(joined.player));
         return dispatch(push(`/rooms/${joined.room.slug}/players/${joined.player.slug}`));
       })
   );

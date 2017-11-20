@@ -1,15 +1,13 @@
 import reducers from './reducers';
 
-describe('Room reducers', () => {
+describe('Rooms reducers', () => {
   let state;
   let action;
   let result;
 
   context('when the state is empty', () => {
     beforeEach(() => {
-      state = {
-        room: {}
-      };
+      state = {};
     });
 
     context('and no action is triggered', () => {
