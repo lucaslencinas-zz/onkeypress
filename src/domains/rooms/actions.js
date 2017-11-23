@@ -42,6 +42,14 @@ export function assignButton({ assignment, room }) {
   };
 }
 
+export function changeDirection({ room, direction }) {
+  return {
+    type: actionTypes.CHANGE_DIRECTION,
+    room,
+    direction
+  };
+}
+
 export function createRoom({ name, password }) {
   return (dispatch) => (
     roomService.createRoom({ name, password })
