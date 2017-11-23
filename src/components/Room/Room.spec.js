@@ -8,7 +8,7 @@ describe('Room', () => {
 
   beforeEach(() => {
     sandbox.stub(socketio, 'createConnection', () => ({ on: () => {}, emit: () => {} }));
-    room = shallow(<Room room={{}} />);
+    room = shallow(<Room room={{ game: {} }} />);
   });
 
   it('renders the Room', () => {

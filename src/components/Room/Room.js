@@ -85,7 +85,7 @@ Room.propTypes = {
   onAddPlayer: PropTypes.func,
   onRemovePlayer: PropTypes.func,
   onButtonClicked: PropTypes.func,
-  onChangeDirection: PropTypes.func,
+  onChangeDirection: PropTypes.func, // eslint-disable-line
   onCurrentPlayers: PropTypes.func,
   onButtonAssigned: PropTypes.func
 };
