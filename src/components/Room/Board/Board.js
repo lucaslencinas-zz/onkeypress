@@ -1,7 +1,12 @@
 import React, { PropTypes } from 'react';
 import config from 'config';
-import { BOARD_HEIGHT } from '~/utils/constants';
-import { isFoodPosition, generateFoodPosition } from '~/utils/position';
+import { BOARD_HEIGHT, STATUS } from '~/utils/constants';
+import {
+  isFoodPosition,
+  generateFoodPosition,
+  isSnakePosition,
+  isBorderPosition
+} from '~/utils/position';
 import { directions } from '~/utils/directions';
 import Row from './Row';
 import styles from './Board.css';
@@ -10,7 +15,6 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: this.props.status,
       direction: this.props.direction,
       snake: config.games.snake.initialState.snakePosition,
       food: config.games.snake.initialState.foodPosition,
@@ -18,6 +22,7 @@ class Board extends React.Component {
     };
 
     this.moveSnake = this.moveSnake.bind(this);
+    this.restartGame = this.restartGame.bind(this);
   }
 
   componentDidMount() {
@@ -49,12 +54,34 @@ class Board extends React.Component {
     return snake.slice(0, snake.length - 1);
   }
 
+  restartGame() {
+    const { roomSlug, onChangeDirection, onChangeStatus } = this.props;
+
+    this.setState({
+      snake: config.games.snake.initialState.snakePosition,
+      food: config.games.snake.initialState.foodPosition,
+      speed: config.games.snake.initialState.speed
+    });
+    onChangeDirection({ room: { slug: roomSlug }, direction: directions.RIGHT });
+    onChangeStatus({ room: { slug: roomSlug }, status: STATUS.STARTED });
+    this.moveSnake();
+  }
+
   moveSnake() {
     const { snake, food } = this.state;
+    const { roomSlug, onChangeStatus } = this.props;
     const head = snake[0];
     const newHead = this.movePiece(head);
     let newSnake;
-    if (isFoodPosition(food, newHead)) { // eat food
+
+    if (isSnakePosition(snake, newHead) || isBorderPosition(newHead)) {
+      onChangeStatus({ room: { slug: roomSlug }, status: STATUS.ENDED });
+      this.setState({ snake: [newHead].concat(snake) });
+      setTimeout(this.restartGame, 3000);
+      return null;
+    }
+
+    if (isFoodPosition(food, newHead)) {
       newSnake = [newHead].concat(snake);
       this.setState({ snake: newSnake, food: generateFoodPosition(newSnake) });
     } else {
@@ -63,10 +90,11 @@ class Board extends React.Component {
     }
 
     setTimeout(this.moveSnake, 5);
+    return null;
   }
 
   render() {
-    const { snake, food } = this.state;
+    const { snake, food, status } = this.state;
     const rows = [];
 
     for (let rowIndex = 0; rowIndex < BOARD_HEIGHT; rowIndex += 1) {
@@ -76,6 +104,7 @@ class Board extends React.Component {
           rowIndex={rowIndex}
           snake={snake}
           food={food}
+          status={status}
         />
       );
     }
@@ -89,7 +118,10 @@ class Board extends React.Component {
 }
 
 Board.propTypes = {
+  roomSlug: PropTypes.string,
   status: PropTypes.string,
+  onChangeStatus: PropTypes.func,
+  onChangeDirection: PropTypes.func,
   direction: PropTypes.string
 };
 

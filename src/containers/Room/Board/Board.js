@@ -3,6 +3,7 @@ import Board from '~/components/Room/Board';
 import { selectors } from '~/domains';
 
 const boardState = (state, params) => ({
+  ...params,
   status: selectors.game(state, params.roomSlug).status,
   direction: selectors.game(state, params.roomSlug).direction
 });

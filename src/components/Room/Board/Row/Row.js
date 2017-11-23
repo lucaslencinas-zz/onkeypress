@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 import {
   SNAKE_CONTENT,
+  SNAKE_DEAD_CONTENT,
   FOOD_CONTENT,
   BORDER_CONTENT,
-  BOARD_WIDTH
+  BOARD_WIDTH,
+  STATUS
 } from '~/utils/constants';
 import {
   isSnakePosition,
@@ -13,10 +15,12 @@ import {
 import Position from '../Position';
 import styles from './Row.css';
 
-const Row = ({ rowIndex, snake = [], food = {} }) => {
+const Row = ({ rowIndex, snake = [], food = {}, status }) => {
   const positions = [];
   const getPositionContent = (position) => {
-    if (isSnakePosition(snake, position)) return SNAKE_CONTENT;
+    if (isSnakePosition(snake, position)) {
+      return status === STATUS.ENDED ? SNAKE_DEAD_CONTENT : SNAKE_CONTENT;
+    }
     if (isFoodPosition(food, position)) return FOOD_CONTENT;
     if (isBorderPosition(position)) return BORDER_CONTENT;
 
@@ -40,7 +44,8 @@ const Row = ({ rowIndex, snake = [], food = {} }) => {
 Row.propTypes = {
   rowIndex: PropTypes.number,
   snake: PropTypes.arrayOf(PropTypes.object),
-  food: PropTypes.object
+  food: PropTypes.object,
+  status: PropTypes.string
 };
 
 export default Row;

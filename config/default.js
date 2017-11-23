@@ -15,7 +15,7 @@ const config = {
   games: {
     snake: {
       initialState: {
-        snakePosition: [{ x: 5, y: 1 }, { x: 4, y: 1 }, { x: 3, y: 1 }, { x: 2, y: 1 }, { x: 1, y: 1 }],
+        snakePosition: [{ x: 7, y: 4 }, { x: 6, y: 4 }, { x: 5, y: 4 }, { x: 4, y: 4 }, { x: 3, y: 4 }],
         foodPosition: { x: 20, y: 20 },
         score: 0,
         status: 'waiting',

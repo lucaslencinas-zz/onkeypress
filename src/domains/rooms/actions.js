@@ -50,6 +50,14 @@ export function changeDirection({ room, direction }) {
   };
 }
 
+export function changeStatus({ room, status }) {
+  return {
+    type: actionTypes.CHANGE_STATUS,
+    room,
+    status
+  };
+}
+
 export function createRoom({ name, password }) {
   return (dispatch) => (
     roomService.createRoom({ name, password })

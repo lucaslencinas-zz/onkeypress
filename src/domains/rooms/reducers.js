@@ -82,6 +82,18 @@ export default function reducers(state = initialState, action) {
         }
       };
 
+    case actionTypes.CHANGE_STATUS:
+      return {
+        ...state,
+        [action.room.slug]: {
+          ...state[action.room.slug],
+          game: {
+            ...state[action.room.slug].game,
+            status: action.status
+          }
+        }
+      };
+
     default:
       return state;
   }

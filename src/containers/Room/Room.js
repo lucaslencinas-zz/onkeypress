@@ -13,6 +13,7 @@ const roomAction = (dispatch) => ({
     dispatch(actions.logPlayerConnected(payload));
   },
   onChangeDirection: (payload) => dispatch(actions.changeDirection(payload)),
+  onChangeStatus: (payload) => dispatch(actions.changeStatus(payload)),
   onRemovePlayer: (payload) => {
     dispatch(actions.removePlayer(payload));
     dispatch(actions.logPlayerDisconnected(payload));
