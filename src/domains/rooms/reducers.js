@@ -1,6 +1,8 @@
+import config from 'config';
 import actionTypes from './actionTypes';
 
 const initialState = {};
+const initialSnakeState = config.games.snake.initialState;
 
 const removePlayerFromList = (players, player) => players.filter((p) => p.slug !== player.slug);
 
@@ -15,7 +17,15 @@ export default function reducers(state = initialState, action) {
     case actionTypes.SET_ROOM:
       return {
         ...state,
-        [action.room.slug]: { ...action.room, players: action.room.players || [] }
+        [action.room.slug]: {
+          ...action.room,
+          players: action.room.players || [],
+          game: {
+            score: initialSnakeState.score,
+            status: initialSnakeState.status,
+            direction: initialSnakeState.direction
+          }
+        }
       };
 
     case actionTypes.SET_CURRENT_PLAYERS:
@@ -57,6 +67,18 @@ export default function reducers(state = initialState, action) {
             state[action.room.slug].players,
             { ...action.player, button: action.button }
           )
+        }
+      };
+
+    case actionTypes.CHANGE_DIRECTION:
+      return {
+        ...state,
+        [action.room.slug]: {
+          ...state[action.room.slug],
+          game: {
+            ...state[action.room.slug].game,
+            direction: action.direction
+          }
         }
       };
 

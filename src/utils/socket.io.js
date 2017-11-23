@@ -9,12 +9,10 @@ export function createConnection(url) {
   };
 
   function onFunction(eventName, callback) {
-    console.log(`----- on ${eventName} -----`);
     return connection.on(eventName, callback);
   }
 
   function emitFunction(eventName, data) {
-    console.log(`----- emit ${eventName} -----`);
     return connection.emit(eventName, data);
   }
 }

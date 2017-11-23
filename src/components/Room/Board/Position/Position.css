@@ -1,3 +1,6 @@
+@import "../../../common/variables.css";
+@import "../../../common/mixins.css";
+
 :local {
   .position {
     flex: 1;
@@ -9,5 +12,9 @@
 
   .food {
     background-color: yellow;
+  }
+
+  .border {
+    background-color: $aluminum-5;
   }
 }
