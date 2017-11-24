@@ -20,7 +20,7 @@ const config = {
         score: 0,
         status: 'waiting',
         direction: 'RIGHT',
-        speed: 2
+        speed: 100
       }
     }
   }

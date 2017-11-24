@@ -5,6 +5,7 @@ const actionTypes = {
   SET_CURRENT_PLAYERS: 'Set Current Players',
   ASSIGN_BUTTON: 'Assign Button',
   CHANGE_DIRECTION: 'Change Direction',
-  CHANGE_STATUS: 'Change Status'
+  CHANGE_STATUS: 'Change Status',
+  CHANGE_SCORE: 'Change Score'
 };
 export default actionTypes;

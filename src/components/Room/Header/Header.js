@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styles from './Header.css';
 
-const Header = ({ room = {}, score = 0 }) => (
+const Header = ({ room = {} }) => (
   <div className={styles.header}>
     <div className={styles.name}>
       <span>Room: {room.name}</span>
@@ -11,7 +11,7 @@ const Header = ({ room = {}, score = 0 }) => (
         {room.gameType}
       </div>
       <div className={styles.score}>
-        Score: {score}
+        Score: {room.game.score}
       </div>
     </div>
     <div className={styles.pass}>
@@ -21,8 +21,7 @@ const Header = ({ room = {}, score = 0 }) => (
 );
 
 Header.propTypes = {
-  room: PropTypes.object,
-  score: PropTypes.number
+  room: PropTypes.object
 };
 
 export default Header;

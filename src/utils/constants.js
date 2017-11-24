@@ -5,6 +5,8 @@ module.exports = {
   BORDER_CONTENT: 'border',
   BOARD_WIDTH: 40,
   BOARD_HEIGHT: 30,
+  DEFAULT_INCREASE_SCORE: 10,
+  DEFAULT_INCREASE_SPEED: 3,
   STATUS: {
     WAITING: 'Waiting',
     READY: 'Ready',

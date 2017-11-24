@@ -6,7 +6,7 @@ describe('Header', () => {
   let header;
 
   beforeEach(() => {
-    header = shallow(<Header room={{}} />);
+    header = shallow(<Header room={{ game: {} }} />);
   });
 
   it('renders the Header', () => {

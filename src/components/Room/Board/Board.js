@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import config from 'config';
-import { BOARD_HEIGHT, STATUS } from '~/utils/constants';
+import { BOARD_HEIGHT, STATUS, DEFAULT_INCREASE_SPEED } from '~/utils/constants';
 import {
   isFoodPosition,
   generateFoodPosition,
@@ -10,6 +10,8 @@ import {
 import { directions } from '~/utils/directions';
 import Row from './Row';
 import styles from './Board.css';
+
+let timeout;
 
 class Board extends React.Component {
   constructor(props) {
@@ -31,6 +33,10 @@ class Board extends React.Component {
 
   componentWillReceiveProps({ direction, status }) {
     this.setState({ status, direction });
+  }
+
+  componentWillUnmount() {
+    clearTimeout(timeout);
   }
 
   movePiece(piece) {
@@ -55,21 +61,25 @@ class Board extends React.Component {
   }
 
   restartGame() {
-    const { roomSlug, onChangeDirection, onChangeStatus } = this.props;
+    const { roomSlug, onRestart } = this.props;
 
     this.setState({
       snake: config.games.snake.initialState.snakePosition,
       food: config.games.snake.initialState.foodPosition,
       speed: config.games.snake.initialState.speed
     });
-    onChangeDirection({ room: { slug: roomSlug }, direction: directions.RIGHT });
-    onChangeStatus({ room: { slug: roomSlug }, status: STATUS.STARTED });
+    onRestart({ room: { slug: roomSlug } });
     this.moveSnake();
   }
 
+  increaseSpeed() {
+    const speed = this.state.speed - DEFAULT_INCREASE_SPEED;
+    return speed > 0 ? speed : 0;
+  }
+
   moveSnake() {
-    const { snake, food } = this.state;
-    const { roomSlug, onChangeStatus } = this.props;
+    const { snake, food, speed } = this.state;
+    const { roomSlug, onChangeStatus, onIncreaseScore } = this.props;
     const head = snake[0];
     const newHead = this.movePiece(head);
     let newSnake;
@@ -83,13 +93,18 @@ class Board extends React.Component {
 
     if (isFoodPosition(food, newHead)) {
       newSnake = [newHead].concat(snake);
-      this.setState({ snake: newSnake, food: generateFoodPosition(newSnake) });
+      this.setState({
+        snake: newSnake,
+        food: generateFoodPosition(newSnake),
+        speed: this.increaseSpeed()
+      });
+      onIncreaseScore({ room: { slug: roomSlug } });
     } else {
       newSnake = [newHead].concat(this.removeLastSnakePiece());
       this.setState({ snake: newSnake });
     }
 
-    setTimeout(this.moveSnake, 5);
+    timeout = setTimeout(this.moveSnake, speed);
     return null;
   }
 
@@ -121,7 +136,8 @@ Board.propTypes = {
   roomSlug: PropTypes.string,
   status: PropTypes.string,
   onChangeStatus: PropTypes.func,
-  onChangeDirection: PropTypes.func,
+  onIncreaseScore: PropTypes.func,
+  onRestart: PropTypes.func,
   direction: PropTypes.string
 };
 

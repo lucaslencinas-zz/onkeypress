@@ -94,6 +94,18 @@ export default function reducers(state = initialState, action) {
         }
       };
 
+    case actionTypes.CHANGE_SCORE:
+      return {
+        ...state,
+        [action.room.slug]: {
+          ...state[action.room.slug],
+          game: {
+            ...state[action.room.slug].game,
+            score: action.score
+          }
+        }
+      };
+
     default:
       return state;
   }

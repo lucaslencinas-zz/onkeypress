@@ -1,5 +1,8 @@
 import { push } from 'react-router-redux';
 import * as roomService from '~/services/roomService';
+import { directions } from '~/utils/directions';
+import { selectors } from '~/domains';
+import { DEFAULT_INCREASE_SCORE, STATUS } from '~/utils/constants';
 import actionTypes from './actionTypes';
 import { actions as playersActions } from '../players/';
 
@@ -55,6 +58,31 @@ export function changeStatus({ room, status }) {
     type: actionTypes.CHANGE_STATUS,
     room,
     status
+  };
+}
+
+function changeScore({ room, score }) {
+  return {
+    type: actionTypes.CHANGE_SCORE,
+    room,
+    score
+  };
+}
+
+export function increaseScore({ room }) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const score = selectors.game(state, room.slug).score;
+
+    return dispatch(changeScore({ room, score: score + DEFAULT_INCREASE_SCORE }));
+  };
+}
+
+export function restart({ room }) {
+  return (dispatch) => {
+    dispatch(changeStatus({ room, status: STATUS.STARTED }));
+    dispatch(changeDirection({ room, direction: directions.RIGHT }));
+    return dispatch(changeScore({ room, score: 0 }));
   };
 }
 

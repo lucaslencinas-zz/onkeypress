@@ -61,7 +61,7 @@ class Room extends React.Component {
   }
 
   render() {
-    const { room, logs, onChangeDirection, onChangeStatus } = this.props;
+    const { room, logs, onChangeStatus, onIncreaseScore, onRestart } = this.props;
 
     return (
       <div className={styles.room}>
@@ -71,8 +71,9 @@ class Room extends React.Component {
             <Header room={room} />
             <Board
               roomSlug={room.slug}
-              onChangeDirection={onChangeDirection}
+              onRestart={onRestart}
               onChangeStatus={onChangeStatus}
+              onIncreaseScore={onIncreaseScore}
             />
           </div>
           <Logs logs={logs} />
@@ -90,6 +91,8 @@ Room.propTypes = {
   onRemovePlayer: PropTypes.func,
   onButtonClicked: PropTypes.func,
   onChangeDirection: PropTypes.func, // eslint-disable-line
+  onRestart: PropTypes.func,
+  onIncreaseScore: PropTypes.func,
   onChangeStatus: PropTypes.func,
   onCurrentPlayers: PropTypes.func,
   onButtonAssigned: PropTypes.func
