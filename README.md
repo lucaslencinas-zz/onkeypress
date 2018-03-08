@@ -18,7 +18,8 @@ NODE_ENV=test npm start
 
 ### Testing
 
-## Unit
+#### Unit
+
 You can run all the unit tests with:
 ```
 npm test
@@ -27,12 +28,4 @@ npm test
 
 ### Technologies
 
-- Node
-- Express
-- socket.io
-- Redis
-- ES6
-- React
-- Redux
-- Webpack
-- PostCSS
+Node, Express, socket.io, Redis, ES6, React, Redux, Webpack, PostCSS
