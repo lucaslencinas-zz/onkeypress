@@ -10,10 +10,8 @@ module.exports = function errorMiddleware(err, req, res, next) {
     status: err.status,
     message: err.message
   };
+  console.log(`${err.status} ${err.name} : ${err.message}`);
+  console.log(err.stack);
 
-  console.log(err);
-
-  res.status(err.status).json(responseError);
-
-  return next(err);
+  return res.status(err.status).json(responseError);
 };

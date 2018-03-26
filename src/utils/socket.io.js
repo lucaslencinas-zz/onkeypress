@@ -5,11 +5,16 @@ export function createConnection(url) {
 
   return {
     on: onFunction,
-    emit: emitFunction
+    emit: emitFunction,
+    close: closeFunction
   };
 
   function onFunction(eventName, callback) {
     return connection.on(eventName, callback);
+  }
+
+  function closeFunction() {
+    return connection.close();
   }
 
   function emitFunction(eventName, data) {

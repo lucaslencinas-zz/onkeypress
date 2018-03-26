@@ -2,9 +2,7 @@ import { asyncConnect } from 'redux-connect';
 
 const defaultPromise = Promise.resolve();
 
-const async = (
-  resolve = defaultPromise
-) => (
+const async = (resolve = defaultPromise) => (
   asyncConnect([{
     promise: (options) => {
       const payload = {

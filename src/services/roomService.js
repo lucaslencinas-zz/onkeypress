@@ -3,10 +3,9 @@ import { snake } from '~/utils/games';
 import { format } from 'url';
 import 'whatwg-fetch';
 
-export function createRoom({ name, password }) {
+export function createRoom({ name }) {
   const room = {
     name,
-    password,
     slug: name,
     ...snake
   };

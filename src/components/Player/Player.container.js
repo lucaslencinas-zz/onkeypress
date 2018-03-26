@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { Player } from '~/components';
 import { selectors } from '~/domains';
+import Player from './Player';
 
 const playerState = (state, { params }) => ({
   room: selectors.room(state, params.roomSlug),

@@ -8,17 +8,12 @@ class Join extends React.Component {
 
     this.handleJoin = this.handleJoin.bind(this);
     this.handleRoomNameChange = this.handleRoomNameChange.bind(this);
-    this.handleRoomPasswordChange = this.handleRoomPasswordChange.bind(this);
     this.handlePlayerNameChange = this.handlePlayerNameChange.bind(this);
-    this.state = { room: { name: '', password: '' }, playerName: '' };
+    this.state = { room: { name: '' }, playerName: '' };
   }
 
   handleRoomNameChange(e) {
     this.setState({ room: { ...this.state.room, name: e.target.value } });
-  }
-
-  handleRoomPasswordChange(e) {
-    this.setState({ room: { ...this.state.room, password: e.target.value } });
   }
 
   handlePlayerNameChange(e) {
@@ -49,18 +44,6 @@ class Join extends React.Component {
               className={styles.inputRoomName}
               value={room.name}
               onChange={this.handleRoomNameChange}
-              autoFocus
-            />
-          </div>
-          <div className={styles.formRow}>
-            <span className={styles.label}>
-              Password:
-            </span>
-            <input
-              placeholder={'Password'}
-              className={styles.inputRoomPassword}
-              value={room.password}
-              onChange={this.handleRoomPasswordChange}
               autoFocus
             />
           </div>

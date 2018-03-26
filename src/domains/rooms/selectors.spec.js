@@ -5,7 +5,7 @@ describe('Rooms Selectors', () => {
   let room1;
 
   beforeEach(() => {
-    room1 = { name: 'someRoomSlug', slug: 'someRoomSlug', pass: 'pass1' };
+    room1 = { name: 'someRoomSlug', slug: 'someRoomSlug' };
     state = {
       rooms: {
         someRoomSlug: room1

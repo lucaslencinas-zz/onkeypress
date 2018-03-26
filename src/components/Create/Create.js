@@ -9,21 +9,16 @@ class Create extends React.Component {
 
     this.handleCreate = this.handleCreate.bind(this);
     this.handleRoomNameChange = this.handleRoomNameChange.bind(this);
-    this.handleRoomPasswordChange = this.handleRoomPasswordChange.bind(this);
-    this.state = { room: { name: '', password: '' } };
+    this.state = { room: { name: '' } };
   }
 
   handleRoomNameChange(e) {
     this.setState({ room: { ...this.state.room, name: e.target.value } });
   }
 
-  handleRoomPasswordChange(e) {
-    this.setState({ room: { ...this.state.room, password: e.target.value } });
-  }
-
   handleCreate() {
-    const { name, password } = this.state.room;
-    this.props.onCreateRoom({ name, password });
+    const { name } = this.state.room;
+    this.props.onCreateRoom({ name });
   }
 
   render() {
@@ -47,23 +42,12 @@ class Create extends React.Component {
           </div>
           <div className={styles.formRow}>
             <span className={styles.label}>
-              Password:
-            </span>
-            <input
-              placeholder={'Password'}
-              className={styles.input}
-              value={room.password}
-              onChange={this.handleRoomPasswordChange}
-            />
-          </div>
-          <div className={styles.formRow}>
-            <span className={styles.label}>
               Game:
             </span>
             <input
               placeholder={'Game'}
               className={styles.input}
-              value={snake.game}
+              value={snake.gameType}
               disabled
             />
           </div>

@@ -1,3 +1,3 @@
-import Games from './Games';
+import Games from './Games.container';
 
 export default Games;

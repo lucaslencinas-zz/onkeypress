@@ -14,9 +14,6 @@ const Header = ({ room = {} }) => (
         Score: {room.game.score}
       </div>
     </div>
-    <div className={styles.pass}>
-      <span>Pass: {room.password}</span>
-    </div>
   </div>
 );
 

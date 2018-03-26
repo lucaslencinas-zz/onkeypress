@@ -1,3 +1,3 @@
-import Player from './Player';
+import Player from './Player.container';
 
 export default Player;

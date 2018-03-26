@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Join } from '~/components';
 import { actions } from '~/domains';
+import Join from './Join';
 
 const joinState = () => ({});
 

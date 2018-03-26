@@ -24,7 +24,7 @@ export function logPlayerDisconnected({ player, room }) {
     room,
     log: {
       event: logTypes.PLAYER_DISCONNECTED,
-      entity: player.name
+      entity: player.name || player.socketId
     }
   });
 }
@@ -49,38 +49,24 @@ export function logRoomDisconnected({ room }) {
   });
 }
 
-export function logCurrentPlayers({ room, players }) {
-  const content = players
-    .map((player) => `${player.name} - ${player.button ? player.button.name : 'Waiting'}`)
-    .join(', ');
-
-  return addLogEntry({
-    room,
-    log: {
-      event: logTypes.CURRENT_PLAYERS,
-      content
-    }
-  });
-}
-
-export function logButtonAssigned({ assignment, room }) {
-  return addLogEntry({
-    room,
-    log: {
-      event: logTypes.BUTTON_ASSIGNED,
-      entity: assignment.player.name,
-      content: `got button ${assignment.button.name}`
-    }
-  });
-}
-
-export function logButtonUnassigned({ assignment, player, room }) {
+export function logButtonAssigned({ player, button, room }) {
   return addLogEntry({
     room,
     log: {
       event: logTypes.BUTTON_ASSIGNED,
       entity: player.name,
-      content: `loosed button ${assignment.button.name}`
+      content: `got button ${button}`
+    }
+  });
+}
+
+export function logButtonUnassigned({ button, player, room }) {
+  return addLogEntry({
+    room,
+    log: {
+      event: logTypes.BUTTON_ASSIGNED,
+      entity: player.name,
+      content: `loosed button ${button}`
     }
   });
 }
@@ -91,7 +77,7 @@ export function logButtonClicked({ action, room }) {
     log: {
       event: logTypes.BUTTON_CLICKED,
       entity: action.player.name,
-      content: `pressed button ${action.button.name}`
+      content: `pressed button ${action.button}`
     }
   });
 }
