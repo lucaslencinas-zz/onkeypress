@@ -1,21 +1,22 @@
 const roomService = require('../services/roomService');
 
 /*
-req.body: { name, password, slug, availableButtons }
+req.body: { name, slug }
 */
-function create(req, res) {
+function create(req, res, next) {
   const room = req.body;
 
   return roomService.create(room)
-    .then((createdRoom) => res.status(201).json(createdRoom));
+    .then((createdRoom) => res.status(201).json(createdRoom))
+    .catch(next);
 }
 
-function join(req, res) {
+function join(req, res, next) {
   const room = req.body.room;
-  const player = req.body.player;
 
-  return roomService.join(room, player)
-    .then((joinedRoom) => res.status(201).json(joinedRoom));
+  return roomService.join(room)
+    .then((joinedRoom) => res.status(201).json(joinedRoom))
+    .catch(next);
 }
 
 module.exports = {

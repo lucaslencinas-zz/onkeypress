@@ -2,12 +2,12 @@ import React from 'react';
 import IndexRoute from 'react-router/lib/IndexRoute';
 import Route from 'react-router/lib/Route';
 import Home from './components/Home';
-import Join from './containers/Join';
-import Room from './containers/Room';
-import Games from './containers/Games';
-import Player from './containers/Player';
-import Create from './containers/Create';
-import Layout from './containers/Layout';
+import Join from './components/Join';
+import Room from './components/Room';
+import Games from './components/Games';
+import Player from './components/Player';
+import Create from './components/Create';
+import Layout from './components/Layout';
 
 export default (
   <Route

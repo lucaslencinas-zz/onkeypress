@@ -1,0 +1,33 @@
+@import "../variables.css";
+@import "../mixins.css";
+
+:local {
+  .direction-button {
+    display: flex;
+    text-align: center;
+
+    .icon {
+      width: 75px;
+    }
+  }
+
+  .clickable {
+    cursor: pointer;
+
+    svg:hover {
+      fill: #087299;
+    }
+  }
+
+  .empty {
+    svg {
+      fill: $steel-1;
+    }
+  }
+
+  .taken {
+    svg {
+      fill: $primary;
+    }
+  }
+}

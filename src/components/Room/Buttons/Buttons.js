@@ -6,7 +6,7 @@ import Button from './Button';
 const defaultButtons = ['LEFT', 'UP', 'DOWN', 'RIGHT'];
 
 const playerForButton = (button, players) => (
-  players.find((p) => (p.button || {}).name === button)
+  players.find((p) => p.button === button)
 );
 
 const Buttons = ({ players = [], buttons = defaultButtons }) => (

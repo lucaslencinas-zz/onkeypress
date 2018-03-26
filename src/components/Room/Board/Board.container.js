@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import Board from '~/components/Room/Board';
 import { selectors } from '~/domains';
+import Board from './Board';
 
 const boardState = (state, params) => ({
   ...params,

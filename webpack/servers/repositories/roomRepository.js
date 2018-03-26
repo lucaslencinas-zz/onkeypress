@@ -1,90 +1,40 @@
-import * as keys from '../utils/redisHelper';
+const ROOMS = 'rooms';
 
 function storage() {
   return global.storage;
 }
 
 function doesRoomExists(roomSlug) {
-  return storage().hexists(keys.rooms(), roomSlug);
+  return storage().hexists(ROOMS, roomSlug);
 }
 
-function saveRoom({ roomSlug, room, socketId }) {
-  let pipelinePromise = storage().pipeline();
-  if (room) {
-    pipelinePromise = pipelinePromise.hset(keys.rooms(), roomSlug, JSON.stringify(room));
-  }
-  if (socketId) {
-    pipelinePromise = pipelinePromise.set(keys.roomBySocket(socketId), roomSlug);
-  }
-  return pipelinePromise.exec();
+function isRoom(socketId) {
+  return getRoomBySocketId(socketId)
+    .then((roomSlug) => !!roomSlug);
 }
 
-function getRoom({ socketId, roomSlug, playerSlug }) {
-  if (playerSlug) {
-    return storage().hget(keys.roomByPlayerSlug(), playerSlug);
-  }
-  if (socketId) {
-    return storage().get(keys.roomBySocket(socketId));
-  }
-  return storage().hget(keys.rooms(), roomSlug)
-    .then((room) => (room ? JSON.parse(room) : room));
+function getRoomBySocketId(socketId) {
+  return storage().hgetall(ROOMS)
+    .then((response) => Object.keys(response || {}).find((slug) => response[slug] === socketId));
 }
 
-function deleteRoom({ roomSlug, socketId }) {
-  let pipelinePromise = storage().pipeline();
-  if (socketId) {
-    pipelinePromise = pipelinePromise.del(keys.roomBySocket(socketId));
-  }
-  if (roomSlug) {
-    pipelinePromise = pipelinePromise.hdel(keys.rooms(), roomSlug);
-  }
-  return pipelinePromise.exec();
+function saveRoom(roomSlug, socketId) {
+  return storage().hset(ROOMS, roomSlug, socketId);
 }
 
-function savePlayer({ playerSlug, player, socketId, roomSlug }) {
-  let pipelinePromise = storage().pipeline();
-  if (player && roomSlug) {
-    pipelinePromise = pipelinePromise.hset(keys.playersByRoomSlug(roomSlug), playerSlug, JSON.stringify(player));
-  }
-  if (socketId) {
-    pipelinePromise = pipelinePromise.set(keys.playerBySocket(socketId), playerSlug);
-  }
-  return pipelinePromise.hset(keys.roomByPlayerSlug(), playerSlug, roomSlug).exec();
+function getRoom(roomSlug) {
+  return storage().hget(ROOMS, roomSlug);
 }
 
-function getPlayer({ socketId, playerSlug, roomSlug }) {
-  if (roomSlug) {
-    if (playerSlug) {
-      return storage().hget(keys.playersByRoomSlug(roomSlug), playerSlug)
-        .then((player) => JSON.parse(player));
-    }
-  }
-  return storage().get(keys.playerBySocket(socketId));
-}
-
-function getPlayers(roomSlug) {
-  return storage().hgetall(keys.playersByRoomSlug(roomSlug))
-    .then((response) => Object.keys(response || {}).map((slug) => JSON.parse(response[slug])));
-}
-
-function deletePlayer({ roomSlug, socketId, playerSlug }) {
-  let pipelinePromise = storage().pipeline();
-  if (socketId) {
-    pipelinePromise = pipelinePromise.del(keys.playerBySocket(socketId));
-  }
-  if (roomSlug) {
-    pipelinePromise = pipelinePromise.hdel(keys.playersByRoomSlug(roomSlug), playerSlug);
-  }
-  return pipelinePromise.hdel(keys.roomByPlayerSlug(), playerSlug).exec();
+function deleteRoom(socketId) {
+  return getRoomBySocketId(socketId)
+    .then((roomSlug) => storage().hdel(ROOMS, roomSlug));
 }
 
 module.exports = {
   doesRoomExists,
+  isRoom,
   saveRoom,
   getRoom,
-  deleteRoom,
-  savePlayer,
-  getPlayer,
-  getPlayers,
-  deletePlayer
+  deleteRoom
 };

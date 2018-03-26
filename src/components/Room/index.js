@@ -1,3 +1,3 @@
-import Room from './Room';
+import Room from './Room.container';
 
 export default Room;

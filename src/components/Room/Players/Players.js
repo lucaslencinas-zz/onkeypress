@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Players.css';
 
-const renderPlayer = ({ name, button = { name: 'Waiting' } }) => `${name} - ${button.name}`;
+const renderPlayer = ({ name, button = 'Waiting' }) => `${name} - ${button}`;
 
 const Players = ({ players = [] }) => (
   <div className={styles.players}>

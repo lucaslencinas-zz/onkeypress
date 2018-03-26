@@ -4,12 +4,12 @@ import actionTypes from './actionTypes';
 const initialState = {};
 const initialSnakeState = config.games.snake.initialState;
 
-const removePlayerFromList = (players, player) => players.filter((p) => p.slug !== player.slug);
+const removePlayerFromList = (players, player) => players.filter((p) => p.socketId !== player.socketId);
 
 export default function reducers(state = initialState, action) {
   const updatePlayerInList = (players, playerContent) => (
     players.slice(0).map(
-      (player) => (player.slug === playerContent.slug ? { ...playerContent, player } : player)
+      (player) => (player.slug === playerContent.slug ? { ...playerContent, ...player } : player)
     )
   );
 
@@ -25,15 +25,6 @@ export default function reducers(state = initialState, action) {
             status: initialSnakeState.status,
             direction: initialSnakeState.direction
           }
-        }
-      };
-
-    case actionTypes.SET_CURRENT_PLAYERS:
-      return {
-        ...state,
-        [action.room.slug]: {
-          ...state[action.room.slug],
-          players: action.players
         }
       };
 

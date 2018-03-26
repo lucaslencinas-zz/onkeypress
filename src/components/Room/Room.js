@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import * as socketio from '~/utils/socket.io';
 import * as events from '~/utils/events';
 import { directionKeyCodes, oppositeDirections } from '~/utils/directions';
-import Board from '~/containers/Room/Board';
+import Board from './Board';
 import Players from './Players';
 import Buttons from './Buttons';
 import Logs from './Logs';
 import Header from './Header';
 import styles from './Room.css';
+
+let keyEventListener;
 
 class Room extends React.Component {
   constructor(props) {
@@ -24,21 +26,26 @@ class Room extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ direction: nextProps.room.game.direction });
+    this.setState({ direction: nextProps.room.game.direction, room: nextProps.room });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', keyEventListener);
+    this.state.connection.close();
   }
 
   setActionListeners() {
     const self = this;
     const { room, onChangeDirection } = self.props;
-
-    window.addEventListener('keydown', (e) => {
+    keyEventListener = (e) => {
       if (e.keyCode < 41 && e.keyCode > 36) {
         const newDirection = directionKeyCodes[e.keyCode];
         if (newDirection !== oppositeDirections[self.state.direction] && newDirection !== self.state.direction) {
           onChangeDirection({ room, direction: newDirection });
         }
       }
-    }, false);
+    };
+    window.addEventListener('keydown', keyEventListener, false);
   }
 
   initializeSocketClient(connection) {
@@ -46,17 +53,13 @@ class Room extends React.Component {
       room,
       onAddPlayer,
       onRemovePlayer,
-      onButtonClicked,
-      onCurrentPlayers,
-      onButtonAssigned
+      onButtonClicked
     } = this.props;
     const handshake = { room };
 
     connection.emit(events.ROOM_CONNECTED, handshake);
-    connection.on(events.PLAYER_CONNECTED, (player) => onAddPlayer({ room, player }));
-    connection.on(events.PLAYER_DISCONNECTED, (player) => onRemovePlayer({ room, player }));
-    connection.on(events.CURRENT_PLAYERS, (players) => onCurrentPlayers({ room, players }));
-    connection.on(events.BUTTON_ASSIGNED, (assignment) => onButtonAssigned({ assignment, room }));
+    connection.on(events.PLAYER_CONNECTED, (player) => onAddPlayer({ connection, room, player }));
+    connection.on(events.PLAYER_DISCONNECTED, (player) => onRemovePlayer({ connection, room, player }));
     connection.on(events.BUTTON_CLICKED, (action) => onButtonClicked({ action, room }));
   }
 
@@ -93,9 +96,7 @@ Room.propTypes = {
   onChangeDirection: PropTypes.func, // eslint-disable-line
   onRestart: PropTypes.func,
   onIncreaseScore: PropTypes.func,
-  onChangeStatus: PropTypes.func,
-  onCurrentPlayers: PropTypes.func,
-  onButtonAssigned: PropTypes.func
+  onChangeStatus: PropTypes.func
 };
 
 export default Room;

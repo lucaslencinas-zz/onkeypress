@@ -1,9 +1,6 @@
 import { connect } from 'react-redux';
-import { Layout } from '~/components';
-import {
-  actions,
-  selectors
-} from '~/domains';
+import { actions, selectors } from '~/domains';
+import Layout from './Layout';
 
 const layoutState = (state) => ({
   alert: selectors.alert(state)

@@ -28,7 +28,7 @@ class Board extends React.Component {
   }
 
   componentDidMount() {
-    this.moveSnake();
+    // this.moveSnake();
   }
 
   componentWillReceiveProps({ direction, status }) {

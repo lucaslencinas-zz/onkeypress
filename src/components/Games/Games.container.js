@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Games } from '~/components';
+import Games from './Games';
 
 const gamesState = () => ({});
 const gamesAction = () => ({});
